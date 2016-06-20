@@ -59,4 +59,20 @@ class Blog extends \yii\db\ActiveRecord
             'mbig_logo' => 'Mbig Logo',
         ];
     }
+
+    /**
+     * 
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            //如果是添加前就补上时间
+            if ($insert) {
+                $this->addtime = date('Y-m-d H:i:s');
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
 }
